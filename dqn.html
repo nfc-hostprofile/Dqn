@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Dqn</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Patrick Hand', cursive;
+            background: #ffeef3;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: row;
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            overflow: hidden;
+            max-width: 1100px;
+            width: 95%;
+            padding: 20px;
+            gap: 20px;
+        }
+
+        .column {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            flex: 1;
+        }
+
+        .section {
+            background: #ffe5ec;
+            border-radius: 12px;
+            padding: 15px;
+        }
+
+        .profile-and-quote {
+            text-align: center;
+            position: relative;
+        }
+        .profile-and-quote img.main {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            border: 6px solid #fff;
+            object-fit: cover;
+            margin-top: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        .profile-and-quote h2 {
+            margin: 15px 0 5px 0;
+            font-size: 26px;
+            color: #c2185b;
+        }
+        .profile-and-quote h3 {
+            margin: 0 0 15px 0;
+            font-size: 16px;
+            color: #777;
+            font-style: italic;
+        }
+        .profile-and-quote .quote {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #f8bbd0;
+        }
+        .profile-and-quote .quote-icon {
+            font-size: 30px;
+            color: #c2185b;
+            line-height: 0.5;
+            margin-bottom: 5px;
+        }
+        .profile-and-quote p {
+            font-size: 16px;
+            color: #555;
+            font-style: italic;
+            line-height: 1.5;
+            margin: 0;
+        }
+
+        .gallery-section {
+            padding: 15px;
+        }
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+        .gallery-item {
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 3px solid #fff;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        .gallery-item img {
+            width: 100%;
+            height: 120px;
+            object-fit: cover;
+            display: block;
+        }
+        .sticker {
+            position: absolute;
+            top: 6px;
+            right: 6px;
+            background: #fff;
+            border-radius: 50%;
+            padding: 4px;
+            font-size: 14px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        }
+
+        .links h2 {
+            color: #c2185b;
+            text-align: center;
+        }
+        .links a {
+            font-family: Arial, sans-serif;
+            display: block;
+            margin: 12px auto;
+            padding: 12px;
+            width: 70%;
+            background: #f8bbd0;
+            color: #333;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            text-align: center;
+            transition: 0.3s;
+        }
+        .links a:hover {
+            background: #f48fb1;
+            color: #fff;
+        }
+
+        .about-box {
+            padding: 15px;
+        }
+        .about-box h2 {
+            color: #c2185b;
+            margin-bottom: 10px;
+        }
+        .about-box ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+        .about-box ul li {
+            margin-bottom: 8px;
+        }
+
+        .personality-item {
+            margin: 15px 0;
+        }
+        .personality-labels {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+            font-size: 14px;
+        }
+        .personality-labels span:last-child {
+            text-align: right;
+        }
+        .progress {
+            background: linear-gradient(135deg, #ffe5ec 0%, #f8bbd0 100%);
+            border-radius: 10px;
+            height: 12px;
+            overflow: hidden;
+            width: 100%;
+            transform: skew(-10deg);
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        }
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(135deg, #c2185b 0%, #f48fb1 100%);
+            border-radius: 10px;
+            transform: skew(10deg);
+            box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+            transition: width 0.3s ease;
+        }
+
+        .traits-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+            justify-content: center;
+        }
+        .trait-box {
+            background: #c2185b;
+            color: #fff;
+            border-radius: 8px;
+            padding: 8px 12px;
+            text-align: center;
+            font-size: 14px;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+
+        .contact-list li {
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        .contact-list strong {
+            color: #c2185b;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+            .gallery-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .profile-and-quote img.main {
+                width: 140px;
+                height: 140px;
+            }
+            .links a {
+                width: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="column">
+            <div class="section profile-and-quote">
+                <img class="main" src="img9.jpg" alt="Profile Picture">
+                <h2>Đặng Quỳnh Ngân 🎀</h2>
+                <h3>"-nagu-"</h3>
+                <div class="quote">
+                    <div class="quote-icon">☁</div>
+                    <p>
+                        Gai con
+                    </p>
+                </div>
+            </div>
+
+            <div class="section gallery-section">
+                <div class="gallery-grid">
+                    <div class="gallery-item">
+                        <img src="img1.jpg" alt="Gallery 1">
+                        <div class="sticker">🍰</div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="img4.jpg" alt="Gallery 2">
+                        <div class="sticker">☕</div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="img6.jpg" alt="Gallery 3">
+                        <div class="sticker">📚</div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="img7.jpg" alt="Gallery 4">
+                        <div class="sticker">🌸</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="column">
+            <div class="section links">
+                <h2>Social Media 🎈</h2>
+                <a href="https://www.facebook.com/tuiladqn" target="_blank">Facebook</a>
+                <a href="https://www.instagram.com/quynh._ngan" target="_blank">Instagram</a>
+                <a href="https://www.tiktok.com/@nag_uuuuuu" target="_blank">TikTok</a>
+            </div>
+
+            <div class="section about-box">
+                <h2>Personality 💅</h2>
+                <div class="personality-item">
+                    <div class="personality-labels">
+                        <span>Introvert</span>
+                        <span>Extrovert</span>
+                    </div>
+                    <div class="progress"><div class="progress-bar" style="width: 20%"></div></div>
+                </div>
+                <div class="personality-item">
+                    <div class="personality-labels">
+                        <span>Analytical</span>
+                        <span>Creative</span>
+                    </div>
+                    <div class="progress"><div class="progress-bar" style="width: 50%"></div></div>
+                </div>
+                <div class="personality-item">
+                    <div class="personality-labels">
+                        <span>Loyal</span>
+                        <span>Fickle</span>
+                    </div>
+                    <div class="progress"><div class="progress-bar" style="width: 80%"></div></div>
+                </div>
+                <div class="personality-item">
+                    <div class="personality-labels">
+                        <span>Passive</span>
+                        <span>Active</span>
+                    </div>
+                    <div class="progress"><div class="progress-bar" style="width: 20%"></div></div>
+                </div>
+            </div>
+
+            <div class="section about-box">
+                <h2>🎵 My music 🎶</h2>
+				<ul>
+				  <li>
+					<a href="https://www.youtube.com/watch?v=bMBdqvJWofQ&list=RDbMBdqvJWofQ&start_radio=1" target="_blank">
+					  Night Changes
+					</a>
+				  </li>
+				  <li>
+					<a href="https://www.youtube.com/watch?v=mTZL5OoG_0Q&list=RDmTZL5OoG_0Q&start_radio=1" target="_blank">
+					  Chuyện Đôi Ta
+					</a>
+				  </li>
+				  <li>
+					<a href="https://www.youtube.com/watch?v=HW4vCxqC95s&list=PLIr0FKr7lj-0pQD7qyiFnVVM3Z7efKGs8&index=22" target="_blank">
+					  Until I Found You
+					</a>
+				  </li>
+				  <li>
+					<a href="https://www.youtube.com/watch?v=rCvac90D5Cs&list=RDrCvac90D5Cs&start_radio=1" target="_blank">
+					   I'll Be There
+					</a>
+				  </li>
+				</ul>
+            </div>
+        </div>
+
+        <div class="column">
+            <div class="section about-box">
+                <h2>About meee 💁‍♀</h2>
+                <p>
+                    Hiii~ 
+                </p>Tui là ĐQN, là gai con, mê giàu, thích BBChan và đã bị người iu chiều hư ✨
+                </p>
+            </div>
+            <div class="section about-box">
+                <h2>Info 📌 </h2>
+                <ul>
+					<li><strong>Age: </strong> Forever 18 </li>
+                    <li><strong>Tele: </strong> 0932 88 91 47</li>
+					<li><strong>Status: </strong> In Love 👫</li>
+					<li><strong>Location: </strong>🏡 Can Tho</li>
+                    <li><strong>Education: </strong> 👩‍🎤 Bachelor of Marketing at CTU </li>
+					<li><strong>Occupation: </strong>👩‍🎓 Student </li>
+                </ul>
+            </div>
+            
+            <div class="section about-box">
+                <h2>Favourite ♥</h2>
+                <ul class="contact-list">
+                    <li><strong>Flower:</strong> 🌷 Baby</li>
+                    <li><strong>Drink</strong> Boba, Matcha 🍵, Oolong </li>
+					<li><strong>Food:</strong> BBQ, Hotpot, Fried Chicken, Icescream</li>
+                    <li><strong>Idol:</strong> BBChan</li>
+                    <li><strong>Show:</strong> ATVNCG ☂, Gia đình Haha </li>
+                </ul>
+                <div class="traits-grid">
+                    <div class="trait-box">Sensitive</div>
+                    <div class="trait-box">Cute</div>
+					<div class="trait-box">Spoiled</div>
+                    <div class="trait-box">Princess</div>
+					<div class="trait-box">Foodie</div>
+					<div class="trait-box">Lovely</div>
+					<div class="trait-box">Lazy</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
